@@ -214,7 +214,7 @@ if __name__ == '__main__':
     
     # set number of epoch !
     N_epoch=100
-    #
+    # start to train
     model.fit(X_train, Y_train,     # train dataset
               batch_size=128,       # batch size
               epochs= N_epoch,      # epoch
