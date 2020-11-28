@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title> harmonic structure parts detect   </title>
+<title> MNIST digits classification using 3x3 pixels basis function   </title>
 <meta name="description" content="MNIST digits classification using 3x3 pixels basis function" />
 <link href="style.css" rel="stylesheet">
 </head>
@@ -11,8 +11,34 @@
 <div class="container-lg px-3 my-5 markdown-body">
 <h1> MNIST digits classification using 3x3 pixels basis function   </h1>
 
+<p>There are a lot of MNIST digits classification methods in the world.<br />
+The feature of this method is use 3x3 pixels basis function.<br /></p>
 
 
+<p><a href="https://github.com/shun60s/mnist-basis-function/">github repository</a><br /></p>
+
+
+<h2>Description  </h2>
+
+<p>Following are eleven 3x3 pixels basis functions in this method.<br /></p>
+
+
+<p><img src="3x3_basis_function.png" alt="figure1" ><br /></p>
+
+<p>Input image is downsized from 28x28 pixels to 3x3 pixels using CNN and MaxPooling.<br />
+And, compute absolute value of difference from 3x3 pixels basis function per each CNN output layer, <br />
+concatenate them and transform to 10 digits probability using one fully-connected layer.<br /></p>
+
+
+<p>This network has 162090 trainable parameters. <br />
+<img src="number_of_parameters.png" alt="figure2" ><br /></p>
+
+<h2>Result  </h2>
+
+<p>Validation accuracy reaches up to 99.4%.  But, it may be difficult to exceed that with this method.<br /></p>
+
+
+<p><img src="accuracy.png" alt="figure3" ><br /></p>
 </div>
 </body>
 </html>

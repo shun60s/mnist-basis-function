@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
     
     
-    # elevn 3x3 pixels basis functions definition
+    # eleven 3x3 pixels basis functions definition
     s3=3  # size of pixel
     # 1st
     r1_s3 = tf.constant([[0, 1, 0],  \
