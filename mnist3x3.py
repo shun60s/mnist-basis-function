@@ -181,7 +181,7 @@ if __name__ == '__main__':
         x310 = sabun10([x3]) 
         
         sabun11= SabunModel(r11_s3, s3=s3, lout=lout)
-        x311 = sabun10([x3]) 
+        x311 = sabun11([x3]) 
         
         # concatenate all eleven difference
         x3 = Lambda(lambda x: K.concatenate([x[0],x[1],x[2],x[3],x[4],x[5],x[6],x[7],x[8],x[9],x[10]], axis=-1),\
