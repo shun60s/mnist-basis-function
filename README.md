@@ -28,3 +28,11 @@ Validation accuracy reaches up to 99.4%.  But, it may be difficult to exceed tha
 
 
 ![figure3](docs/accuracy.png)  
+
+
+## Incorrect prediction image sample  
+
+Following sample are incorrect prediction image with binarization.  
+
+![figure4](docs/incorrect_42.png)  
+![figure5](docs/incorrect_83.png)  

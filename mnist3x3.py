@@ -225,3 +225,35 @@ if __name__ == '__main__':
     
     # save weight, at last
     model.save_weights( F_name )
+    
+    # show incorrect prediction image with binarization
+    if True:   
+        # set maximum number how many show incorrect prediction image from the beginning
+        show_max_number=20
+        
+        # compute prediction at once
+        predict = model.predict(X_test, batch_size=32,verbose=1) # predict of validation data
+        
+        indexes = np.argmax(predict, axis=1) # get predict label index
+        incorrect_indexes=np.arange(len(y_test))[indexes != y_test]  # get incorrect indexes
+        print ('number of incorrect image', len(incorrect_indexes))
+        
+        predict_value= np.amax(predict,axis=1)   # get predict value of predict label
+        true_value=np.choose(y_test, predict.T)  # get predict value of true label
+        
+        for i, id in enumerate(incorrect_indexes): 
+            print ('id ', id)
+            print ('true_label', y_test[id], ' predict_label', indexes[id])
+            print ('value_of_true_label', true_value[id], ' value_of_predict_label', predict_value[id])
+            
+            # show incorrect digit binarization image
+            for y in range(28):
+                for x in range(28):
+                    if  X_test[id,y,x] > 0.0:
+                        print ( '1', end='')
+                    else:
+                        print ( '0', end='')
+                print('')
+            
+            if i >= show_max_number :
+                break # show stop
