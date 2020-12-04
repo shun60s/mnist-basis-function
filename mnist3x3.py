@@ -61,9 +61,9 @@ if __name__ == '__main__':
     print("X_train original shape", X_train.shape)
     print("y_train original shape", y_train.shape)
     
-    X_train = X_train.reshape(60000, 28,28,1) # train dataset (60000 samples, 28ｘ28 pixels, color 1)
-    X_test = X_test.reshape(10000, 28,28,1)   # validation dataset (10000 samples, 28ｘ28 pixels, color 1)
-    #  transform from grayscale integer value to float 0.0～1.0
+    X_train = X_train.reshape(60000, 28,28,1) # train dataset (60000 samples, 28x28 pixels, color 1)
+    X_test = X_test.reshape(10000, 28,28,1)   # validation dataset (10000 samples, 28x28 pixels, color 1)
+    #  transform from grayscale integer value to float 0.0-1.0
     X_train = X_train.astype('float32')
     X_test = X_test.astype('float32')
     X_train /= 255
@@ -135,7 +135,7 @@ if __name__ == '__main__':
                          [0, 0, 1]], dtype='float32')
     
     
-    #　number of output layer
+    # number of output layer
     lout=128
     # input image 28x28 pixels 1 color 
     inp = Input(shape = (28,28,1))
