@@ -36,3 +36,12 @@ Following sample are incorrect prediction image with binarization.
 
 ![figure4](docs/incorrect_42.png)  
 ![figure5](docs/incorrect_83.png)  
+
+
+## Heat map of weights  
+
+Following shows weights of last fully-connected layer.  
+1st basis function, of which Dense inputs are 0-127, seems less effective factor.  
+
+![figure6](docs/heatmap.png)  
+

@@ -17,6 +17,8 @@ Environment
  *tensorboard 2.3.0
  
  *numpy 1.18.5
+
+ *matplotlib  3.2.2
 """
 
 # Commented out IPython magic to ensure Python compatibility.
@@ -53,7 +55,7 @@ def SabunModel(r_s3, s3=3, lout=128):
     return  Model(inputs=[xin], outputs=out)
 
 if __name__ == '__main__':   
-
+    
     nb_classes = 10  # digits numebr, that are 0,1,2,3,4,5,6,7,8,9
     
     # Load MNIST dataset
@@ -74,7 +76,7 @@ if __name__ == '__main__':
     # transform from label integer to one-hot vector ex: [0,0,1,0,0]
     Y_train = to_categorical(y_train, nb_classes)
     Y_test =  to_categorical(y_test, nb_classes) 
-
+    
     
     
     # eleven 3x3 pixels basis functions definition
@@ -186,6 +188,10 @@ if __name__ == '__main__':
         # concatenate all eleven difference
         x3 = Lambda(lambda x: K.concatenate([x[0],x[1],x[2],x[3],x[4],x[5],x[6],x[7],x[8],x[9],x[10]], axis=-1),\
                  output_shape=(1,lout*11))([x31,x32,x33,x34,x35,x36,x37,x38,x39,x310,x311]) # (1,1408)
+        
+        # in case of use nine basis functions except 1st and 10th
+        #x3 = Lambda(lambda x: K.concatenate([x[0],x[1],x[2],x[3],x[4],x[5],x[6],x[7],x[8]], axis=-1),\
+        #         output_shape=(1,lout*9))([x32,x33,x34,x35,x36,x37,x38,x39,x311]) # (1,1152)   
     
     # flatten to Dense input
     x = Flatten()(x3) # (1408)
@@ -214,9 +220,9 @@ if __name__ == '__main__':
     
     # set number of epoch !
     N_epoch=100
-    # start to train
+    #
     model.fit(X_train, Y_train,     # train dataset
-              batch_size=128,       # batch size
+              batch_size=128,       # batch seze
               epochs= N_epoch,      # epoch
               verbose=1,            # show progress
               validation_data=(X_test, Y_test),  # validation dataset
@@ -255,5 +261,31 @@ if __name__ == '__main__':
                         print ( '0', end='')
                 print('')
             
-            if i >= show_max_number :
+            if i >= show_max_number :  
                 break # show stop
+    
+    # import matplotlib to draw heat map
+    import matplotlib.pyplot as plt
+    
+    # Commented out IPython magic to ensure Python compatibility.
+    # magic command in google colaboratory to use matplotlib
+    # %matplotlib inline
+    
+    # show heat map of weights of last fully-connected layer, Dense(10, ...
+    if True:
+        dense10 = model.layers[-1]  # get weights of last fully-connected layer, Dense(10, ...
+        print(dense10.get_weights()[0]) # print out weights value
+        
+        # draw heat map
+        fig = plt.figure(figsize=(9, 3))
+        ax = fig.add_subplot(1,1,1)
+        d10_weights= np.abs(dense10.get_weights()[0]).T
+        ax.pcolor(d10_weights, cmap=plt.cm.Reds) # set color map to draw heat map
+        
+        ax.set_title(' heat map of weights of last fully-connected layer')
+        ax.set_ylabel('digits')
+        ax.set_xlabel('Dense inputs')
+        ax.set_xticks(np.arange(int(dense10.get_weights()[0].shape[0]/lout))*lout) # auxiliary scale per one basis function
+        ax.set_yticks(np.arange(10))      # auxiliary scale per digit
+        plt.tight_layout()
+        plt.show()
