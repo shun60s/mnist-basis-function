@@ -45,3 +45,8 @@ Following shows weights of last fully-connected layer.
 
 ![figure6](docs/heatmap.png)  
 
+
+## License  
+
+MIT  
+
