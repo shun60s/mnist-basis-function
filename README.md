@@ -2,7 +2,7 @@
 
 There are a lot of MNIST digits classification methods in the world.  
 The feature of this method is use 3x3 pixels basis function.  
-
+Using basis functions aims for study to control DNN.  
 
 [github repository](https://github.com/shun60s/mnist-basis-function/)  
 
